@@ -1,13 +1,4 @@
-import matplotlib.pyplot as plt
-from scipy.signal import find_peaks
-import plotly.plotly as py
-import plotly.graph_objs as go
-from plotly.tools import FigureFactory as FF
-
 import numpy as np
-import pandas as pd
-import scipy
-import peakutils
 x =[ 2.275090217590332,
 2.38462495803833,
 2.449866771697998,
