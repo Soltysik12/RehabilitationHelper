@@ -1,5 +1,5 @@
 #!flask/bin/python
-from flask import Flask, jsonify
+from flask import Flask,request, jsonify
 import json
 
 app = Flask(__name__)
@@ -8,12 +8,11 @@ app = Flask(__name__)
 def index():
     return "Hello, World!"
 
-@app.route('/api/sensor/', methods=['POST'])
-def get_sensor_data():
-	data = json.loads(request.data)
-	print(data)
-	counts = 1
-	return jsonify({'counts' : counts})
+@app.route("/api/sensor", methods=["POST"])
+def json_example():
+    req = request.get_json()
+    print(req)
+    return "Thanks!"
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')

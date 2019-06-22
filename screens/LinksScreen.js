@@ -1,6 +1,15 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Accelerometer} from 'expo';
+import axios from 'axios';
+
+
+const BASE_URI = 'http://192.168.43.143:5000';
+
+const client = axios.create({
+    baseURL: BASE_URI,
+    json: true
+});
 
 export default class AccelerometerSensor extends React.Component {
     state = {
@@ -38,8 +47,6 @@ export default class AccelerometerSensor extends React.Component {
         this._subscription = Accelerometer.addListener(
             accelerometerData => {
                 const {dataPlot} = this.state
-                // console.log("dataPlot")
-                // console.log(dataPlot)
                 const arr = dataPlot.concat([accelerometerData])
                 this.setState({accelerometerData: accelerometerData, dataPlot: arr});
             }
@@ -49,14 +56,27 @@ export default class AccelerometerSensor extends React.Component {
     _unsubscribe = () => {
         this._subscription && this._subscription.remove();
         this._subscription = null;
-        this.filterX()
+        // this.filterX()
     };
 
-    filterX = () => {
-        const {dataPlot} = this.state
-        const filtered = dataPlot.map(({x}) => x)
-        console.log(filtered)
+    // filterX = () => {
+    //     const {dataPlot} = this.state
+    //     const filtered = dataPlot.map(({x}) => x)
+    //     fetch('http://localhost:5000/api/sensor/', {
+    //         method: 'POST',
+    //         body: JSON.stringify({
+    //             filtered
+    //         })
+    //     })
+    //     console.log(filtered)
+    // }
+
+    sendMessage = () => {
+        return client.post('/json', {data: 'aaaa'})
+            .then((res) => res)
+            .catch((err) => console.error(err))
     }
+
 
     render() {
         let {
@@ -81,6 +101,11 @@ export default class AccelerometerSensor extends React.Component {
                     </TouchableOpacity>
                     <TouchableOpacity onPress={this._fast} style={styles.button}>
                         <Text>Fast</Text>
+                    </TouchableOpacity>
+                </View>
+                <View>
+                    <TouchableOpacity onPress={this.sendMessage} style={styles.button}>
+                        <Text>Send</Text>
                     </TouchableOpacity>
                 </View>
             </View>
