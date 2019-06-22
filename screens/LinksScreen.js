@@ -56,23 +56,17 @@ export default class AccelerometerSensor extends React.Component {
     _unsubscribe = () => {
         this._subscription && this._subscription.remove();
         this._subscription = null;
-        // this.filterX()
+        this.filterX()
     };
 
-    // filterX = () => {
-    //     const {dataPlot} = this.state
-    //     const filtered = dataPlot.map(({x}) => x)
-    //     fetch('http://localhost:5000/api/sensor/', {
-    //         method: 'POST',
-    //         body: JSON.stringify({
-    //             filtered
-    //         })
-    //     })
-    //     console.log(filtered)
-    // }
+    filterX = () => {
+        const {dataPlot} = this.state
+        const filtered = dataPlot.map(({x}) => x)
+        this.sendMessage(filtered)
+    }
 
-    sendMessage = () => {
-        return client.post('/json', {data: 'aaaa'})
+    sendMessage = (data) => {
+        return client.post('/api/sensor', {data: data})
             .then((res) => res)
             .catch((err) => console.error(err))
     }
