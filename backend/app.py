@@ -1,7 +1,7 @@
 #!flask/bin/python
 from flask import Flask,request, jsonify
 import json
-
+from main import normalize_and_draw
 app = Flask(__name__)
 
 @app.route('/')
@@ -11,7 +11,8 @@ def index():
 @app.route("/api/sensor", methods=["POST"])
 def json_example():
     req = request.get_json()
-    print(req)
+    x = req['data']
+    normalize_and_draw(x)
     return "Thanks!"
 
 if __name__ == '__main__':
