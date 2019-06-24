@@ -1,7 +1,7 @@
 #!flask/bin/python
 from flask import Flask,request, jsonify
 import json
-from main import calculate_dtw
+from main import find_repetitions_and_exercise
 app = Flask(__name__)
 
 @app.route('/')
@@ -14,7 +14,7 @@ def json_example():
     x = req['data']
     print(x)
     if(len(x)):
-        calculate_dtw(x, x)
+        print(find_repetitions_and_exercise(x))
     return "Thanks!"
 
 if __name__ == '__main__':
