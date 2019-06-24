@@ -1,7 +1,7 @@
 #!flask/bin/python
 from flask import Flask,request, jsonify
 import json
-from main import normalize_and_draw
+from main import calculate_dtw
 app = Flask(__name__)
 
 @app.route('/')
@@ -12,7 +12,8 @@ def index():
 def json_example():
     req = request.get_json()
     x = req['data']
-    normalize_and_draw(x)
+    print(len(x))
+    calculate_dtw(x, x)
     return "Thanks!"
 
 if __name__ == '__main__':
