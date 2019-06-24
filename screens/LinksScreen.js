@@ -63,12 +63,14 @@ export default class AccelerometerSensor extends React.Component {
         const {dataPlot} = this.state
         const filtered = dataPlot.map(({x}) => x)
         this.sendMessage(filtered)
+        this.setState({dataPlot: []})
     }
 
     sendMessage = (data) => {
         return client.post('/api/sensor', {data: data})
             .then((res) => res)
             .catch((err) => console.error(err))
+
     }
 
 
