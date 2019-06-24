@@ -12,8 +12,9 @@ def index():
 def json_example():
     req = request.get_json()
     x = req['data']
-    print(len(x))
-    calculate_dtw(x, x)
+    print(x)
+    if(len(x)):
+        calculate_dtw(x, x)
     return "Thanks!"
 
 if __name__ == '__main__':
