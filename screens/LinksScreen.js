@@ -99,7 +99,7 @@ export default class AccelerometerSensor extends React.Component {
                         <Text>Fast</Text>
                     </TouchableOpacity>
                 </View>
-                <View>
+                <View style={styles.buttonContainer}>
                     <TouchableOpacity onPress={this.sendMessage} style={styles.button}>
                         <Text>Send</Text>
                     </TouchableOpacity>
