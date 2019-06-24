@@ -79,7 +79,7 @@ def find_exercise(x):
 		return "arm"
 
 def count_repititions(x, template_counts):
-    normed_template = movingaverage(x, 8)
+	normed_template = movingaverage(x, 8)
 	x = np.array(normed_template)
 	peaks, _ = find_peaks(x, height=0.1)
 	number_of_repetitions = len(peaks)/template_counts
