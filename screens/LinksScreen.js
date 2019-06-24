@@ -63,7 +63,10 @@ export default class AccelerometerSensor extends React.Component {
         const {dataPlot} = this.state
         const filtered = dataPlot.map(({x}) => x)
         this.sendMessage(filtered)
-        this.setState({dataPlot: []})
+    }
+
+    reset = () => {
+        this.setState({dataPlot: [], accelerometerData: {}})
     }
 
     sendMessage = (data) => {
@@ -100,8 +103,8 @@ export default class AccelerometerSensor extends React.Component {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.buttonContainer}>
-                    <TouchableOpacity onPress={this.sendMessage} style={styles.button}>
-                        <Text>Send</Text>
+                    <TouchableOpacity onPress={this.reset} style={styles.button}>
+                        <Text>Reset</Text>
                     </TouchableOpacity>
                 </View>
             </View>
