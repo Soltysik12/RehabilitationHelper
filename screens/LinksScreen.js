@@ -15,7 +15,7 @@ export default class AccelerometerSensor extends React.Component {
     state = {
         accelerometerData: {},
         dataPlot: [],
-        receivedData: {exercise_name: 'triceps', count: 1}
+        receivedData: {exercise_name: '', count: 0}
     };
 
     componentDidMount() {
@@ -32,16 +32,6 @@ export default class AccelerometerSensor extends React.Component {
         } else {
             this._subscribe();
         }
-    };
-
-    _slow = () => {
-        Accelerometer.setUpdateInterval(100);
-    };
-
-    _fast = () => {
-        Accelerometer.setUpdateInterval(
-            16
-        );
     };
 
     _subscribe = () => {
@@ -67,13 +57,15 @@ export default class AccelerometerSensor extends React.Component {
     }
 
     reset = () => {
-        this.setState({dataPlot: [], accelerometerData: {}})
+        this.setState({dataPlot: [], accelerometerData: {}, receivedData: {exercise_name: '', count: 0}})
     }
 
     sendMessage = (data) => {
-        return client.post('/api/sensor', {data: data})
-            .then((res) => res)
-            .catch((err) => console.error(err))
+        client.post('/api/sensor', {data: data})
+            .then((res) => {
+                this.setState({receivedData: res.data})
+            })
+            .catch((err) => err)
     }
 
 
@@ -125,11 +117,11 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     header: {
-      fontSize: 20,
+        fontSize: 20,
         marginBottom: 20
     },
     text: {
-      textAlign: 'center',
+        textAlign: 'center',
         fontSize: 16,
         marginTop: 20
     },

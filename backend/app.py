@@ -16,7 +16,7 @@ def json_example():
 	if(len(x) > 0):
 		json_data = find_repetitions_and_exercise(x)
 		print(json_data)
-		return(json_data)
+		return(jsonify(json_data))
 	return 'Thanks'
 
 if __name__ == '__main__':
