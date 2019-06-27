@@ -97,7 +97,7 @@ def find_repetitions_and_exercise(x):
 # print(find_repetitions_and_exercise(triceps))
 # draw_peaks(arm_template)
 # cut = circles_template[25:80]
-# yMA = movingaverage(arm_template, 3)
+# yMA = movingaverage(arm_template, 6)
 # cut = yMA[58:86]
 # print(cut)
 
