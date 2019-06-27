@@ -13,10 +13,11 @@ def json_example():
 	req = request.get_json()
 	x = req['data']
 	print(x)
-	if(len(x)):
+	if(len(x) > 0):
 		json_data = find_repetitions_and_exercise(x)
 		print(json_data)
-		return json_data
+		return(json_data)
+	return 'Thanks'
 
 if __name__ == '__main__':
 	app.run(debug=True, host='0.0.0.0')

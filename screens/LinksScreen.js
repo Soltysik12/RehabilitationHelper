@@ -14,7 +14,8 @@ const client = axios.create({
 export default class AccelerometerSensor extends React.Component {
     state = {
         accelerometerData: {},
-        dataPlot: []
+        dataPlot: [],
+        receivedData: {exercise_name: 'triceps', count: 1}
     };
 
     componentDidMount() {
@@ -73,7 +74,6 @@ export default class AccelerometerSensor extends React.Component {
         return client.post('/api/sensor', {data: data})
             .then((res) => res)
             .catch((err) => console.error(err))
-
     }
 
 
@@ -84,24 +84,24 @@ export default class AccelerometerSensor extends React.Component {
             z,
         } = this.state.accelerometerData;
 
+        const {receivedData: {exercise_name, count}} = this.state
         return (
             <View style={styles.sensor}>
-                <Text>Accelerometer:</Text>
-                <Text>
+                <Text style={styles.header}>Rehabilitation Helper - Exercises</Text>
+                <Text style={styles.text}>
                     x: {round(x)} y: {round(y)} z: {round(z)}
                 </Text>
-
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity onPress={this._toggle} style={styles.button}>
                         <Text>Toggle</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={this._slow} style={[styles.button, styles.middleButton]}>
-                        <Text>Slow</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={this._fast} style={styles.button}>
-                        <Text>Fast</Text>
-                    </TouchableOpacity>
                 </View>
+                <Text style={styles.text}>
+                    Cwiczenie: {exercise_name}
+                </Text>
+                <Text style={styles.text}>
+                    Ilość powtórzeń: {count}
+                </Text>
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity onPress={this.reset} style={styles.button}>
                         <Text>Reset</Text>
@@ -123,6 +123,15 @@ function round(n) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+    },
+    header: {
+      fontSize: 20,
+        marginBottom: 20
+    },
+    text: {
+      textAlign: 'center',
+        fontSize: 16,
+        marginTop: 20
     },
     buttonContainer: {
         flexDirection: 'row',
