@@ -77,6 +77,7 @@ export default class AccelerometerSensor extends React.Component {
         } = this.state.accelerometerData;
 
         const {receivedData: {exercise_name, count}} = this.state
+        const exerciseName = exercise_name && exercise_name.toUpperCase()
         return (
             <View style={styles.sensor}>
                 <Text style={styles.header}>Rehabilitation Helper - Exercises</Text>
@@ -89,7 +90,7 @@ export default class AccelerometerSensor extends React.Component {
                     </TouchableOpacity>
                 </View>
                 <Text style={styles.text}>
-                    Cwiczenie: {exercise_name}
+                    Cwiczenie: {exerciseName}
                 </Text>
                 <Text style={styles.text}>
                     Ilość powtórzeń: {count}
